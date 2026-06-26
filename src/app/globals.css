@@ -1,5 +1,9 @@
 @import "tailwindcss";
 @import "@heroui/styles"; 
+@theme {
+  --color-primary: #e8c547;
+  --color-dark: #0f0e17;
+}
 
 
 
