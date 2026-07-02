@@ -5,16 +5,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
-export const getData =async () => {
-  const  res = await fetch("http://localhost:5001/tiles");
-  return res.json();
+// export const getData =async () => {
+//   const  res = await fetch("http://localhost:5001/tiles");
+//   return res.json();
 
-}
+// }
 
 const Navbar =async () => {
 
-  const data =await getData();
-  console.log(data);
+  // const data =await getData();
+  // console.log(data);
 
   return (
     <div className="border-b px-2 ">
@@ -40,7 +40,7 @@ const Navbar =async () => {
             className="object-cover h-auto w-auto"
           /> */}
           <Link href={"/"}>
-          <h3 className="font-black text-white text-lg flex gap-1 items-center"><TbLayoutDashboardFilled />
+          <h3 className="font-black text-white text-lg flex gap-1 items-center "><TbLayoutDashboardFilled />
 Tiles Gallery</h3>
           </Link>
         </div>

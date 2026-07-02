@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import { MdEmail } from "react-icons/md";
+import { BiLocationPlus, BiPhone } from "react-icons/bi";
 
 const Footer = () => {
   return (
@@ -30,45 +32,44 @@ const Footer = () => {
                 height={32}
                 className="dark:brightness-200"
               /> */}
-              <h2 className="text-xl font-semibold tracking-tight text-white dark:text-white">
-               Tiles Gallery
+              <h2 className="text-xl font-semibold tracking-tight text-primary dark:text-white">
+                Tiles Gallery
               </h2>
             </div>
 
-            <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400 max-w-xs">
-              Create production-ready AI visuals in seconds. Built for speed,
-              scale, and creativity.
+            <p className="text-sm leading-relaxed  transition text-gray-600 dark:text-gray-400 max-w-xs">
+              Premium tile gallery bringing aesthetic beauty to your spac
             </p>
           </div>
 
           {/* Product */}
           <div>
-            <h3 className="text-sm font-semibold text-white dark:text-white mb-4">
-              Product
+            <h3 className="text-sm font-semibold text-primary dark:text-white mb-4">
+              Quick Links
             </h3>
             <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
               <li>
                 <Link
-                  href="/generate"
-                  className="hover:text-white dark:hover:text-white transition"
+                  href="/"
+                  className="hover:text-primary dark:hover:text-white transition"
                 >
-                  Generate
+                 Home
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/all-photos"
-                  className="hover:text-white dark:hover:text-white transition"
+                  href="/all-tiles"
+                  className="hover:text-primary dark:hover:text-white transition"
                 >
-                  Gallery
+                  All Tiles
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/pricing"
-                  className="hover:text-white dark:hover:text-white transition"
+                  href="/my-profile"
+                  className="hover:text-primary dark:hover:text-white transition"
                 >
-                  Pricing
+                  My Profile
                 </Link>
               </li>
             </ul>
@@ -76,32 +77,34 @@ const Footer = () => {
 
           {/* Company */}
           <div>
-            <h3 className="text-sm font-semibold text-white dark:text-white mb-4">
-              Company
+            <h3 className="text-sm font-semibold text-primary dark:text-white mb-4">
+              Contact Us
             </h3>
             <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
               <li>
                 <Link
-                  href="/about"
-                  className="hover:text-white dark:hover:text-white transition"
+                  href="mailto:mdromman417@gmail.com"
+                  className="hover:text-primary dark:hover:text-white transition flex items-center gap-1"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  About
+                  <MdEmail /> mdromman417@gmail.com
                 </Link>
               </li>
               <li>
                 <Link
                   href="/contact"
-                  className="hover:text-white dark:hover:text-white transition"
+                  className="hover:text-primary dark:hover:text-white transition flex items-center gap-1"
                 >
-                  Contact
+                  <BiPhone /> +1 (123) 456-7890
                 </Link>
               </li>
               <li>
                 <Link
                   href="/terms"
-                  className="hover:text-white dark:hover:text-white transition"
+                  className="hover:text-primary dark:hover:text-white transition flex items-center gap-1"
                 >
-                  Terms
+                  <BiLocationPlus /> TGAve, NY
                 </Link>
               </li>
             </ul>
@@ -109,7 +112,7 @@ const Footer = () => {
 
           {/* CTA Block */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-white dark:text-white">
+            <h3 className="text-sm font-semibold text-primary dark:text-white">
               Start creating
             </h3>
 
@@ -134,18 +137,20 @@ const Footer = () => {
 
         {/* Bottom */}
         <div className="mt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
-          <p>© {new Date().getFullYear()} Tiles Gallery. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} Tiles Gallery. All rights reserved.
+          </p>
 
           <div className="flex items-center gap-6">
             <Link
               href="/privacy"
-              className="hover:text-black dark:hover:text-white transition"
+              className="hover:text-white dark:hover:text-white transition"
             >
               Privacy
             </Link>
             <Link
               href="/terms"
-              className="hover:text-black dark:hover:text-white transition"
+              className="hover:text-white dark:hover:text-white transition"
             >
               Terms
             </Link>
