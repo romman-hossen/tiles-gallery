@@ -7,7 +7,7 @@ const TilesCard = ({ tile }) => {
     <div className="animate__animated animate__zoomIn
              transition-all duration-300
              hover:scale-105 hover:-translate-y-2 hover:shadow-2xl">
-      <Card className="p-0 gap-2 bg-black/50 animate__animated animate__zoomIn">
+      <Card className="p-0 gap-2 bg-black/50 animate__animated animate__zoomIn flex-1">
         {/* <img
           alt="Indie Hackers community"
           className="pointer-events-none aspect-square w-14 rounded-2xl object-cover select-none"
@@ -22,22 +22,22 @@ const TilesCard = ({ tile }) => {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             alt={tile?.title}
           />
-          <Chip className="absolute right-2 top-2 bg-white/10 backdrop-blur-xl">
+          <Chip className="absolute right-2 top-2 bg-primary">
           {
-              tile?.inStock ? <span className="text-primary">In Stock</span> : <span className="text-red-500">Out of Stock</span>
+              tile?.inStock ? <span className="">In Stock</span> : <span className="text-rose-500">Out of Stock</span>
             }
           </Chip>    
         </div>
         <div className="p-4 rounded-b-2xl ">
-          <Card.Header className="space-y-2">
-            <Card.Title className="text-white text-xl md:text-2xl">
+          <Card.Header className="">
+            <Card.Title className="text-white min-h-12 text-xl md:text-2xl">
               {tile?.title}
             </Card.Title>
             <Card.Description className="text-white/70">
               <span>{tile?.material} :</span>
               <span> {tile?.dimensions}</span>
             </Card.Description>
-            <Card.Content className="text-white/70">
+            <Card.Content className="text-white/70 mt-2">
               <div className="flex gap-3 items-center">
                 <span>Price : </span>
                 <span className="text-primary text-xl md:text-2xl">
