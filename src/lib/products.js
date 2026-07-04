@@ -1,6 +1,6 @@
 export const GetAllProducts = async () => {
   try {
-    const response = await fetch("http://localhost:5001/tiles");
+    const response = await fetch("https://tiles-server-qqhd.onrender.com/tiles");
     if (!response.ok) {
       throw new Error("Failed to fetch products");
     }   

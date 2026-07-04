@@ -60,7 +60,7 @@ Tiles Gallery</h3>
         <div className="flex gap-4">
             <ul className="flex items-center text-white  text-sm gap-5">
               <li>
-                <Link href={"/signup"}>SignUp</Link>
+                <Link href={"/signUp"}>SignUp</Link>
               </li>
               <li>
                 <Link href={"/signin"}>SignIn</Link>
