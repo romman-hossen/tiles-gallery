@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Button,
   Description,
@@ -9,45 +8,26 @@ import {
   Form,
   Input,
   Label,
-  TextArea,
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 
-const signUp = () => {
+const signIn = () => {
   return (
     <div className="flex items-center justify-center bg-black/50 min-h-[60vh] p-10 md:p-20">
-      <Form className="w-full max-w-110 bg-[#30302E] p-6 md:p-10 rounded-2xl">
+      <Form className="w-full max-w-110 bg-[#30302E] p-6 md:p-12 rounded-2xl">
         <Fieldset>
           <Fieldset.Legend className="text-white text-2xl text-center mb-2">
             <TbLayoutDashboardFilled />
           </Fieldset.Legend>
           <Description className="text-center text-white text-2xl ">
-            Create Account
+           Welcome Back 
+            <p className="text-sm text-white/70 pt-1">Login to your TilesGallery account</p>    
           </Description>
+  
           <FieldGroup className="">
-            <TextField
-              isRequired
-              name="name"
-              validate={(value) => {
-                if (value.length < 3) {
-                  return "Name must be at least 3 characters";
-                }
-
-                return null;
-              }}
-            >
-              <Label className="text-white/70">Full Name</Label>
-              <Input
-                className={
-                  "bg-black/50 border border-gray-700 text-white rounded-lg"
-                }
-                placeholder="Your name"
-              />
-              <FieldError />
-            </TextField>
             <TextField
               isRequired
               name="email"
@@ -64,29 +44,7 @@ const signUp = () => {
                 className={
                   "bg-black/50 border border-gray-700 text-white rounded-lg"
                 }
-                placeholder="you@example.com"
-              />
-              <FieldError />
-            </TextField>
-            <TextField
-              isRequired
-              name="photoUrl"
-              validate={(value) => {
-                if (!value || value.trim().length === 0) {
-                  return "Photo URL is required";
-                }
-                if (value.length < 10) {
-                  return "URL is too short";
-                }
-                return null;
-              }}
-            >
-              <Label className="text-white/70">Photo URL</Label>
-              <Input
-                className={
-                  "bg-black/50 border border-gray-700 text-white rounded-lg"
-                }
-                placeholder="https://example.com/photo.jpg"
+                placeholder="Enter your email"
               />
               <FieldError />
             </TextField>
@@ -109,7 +67,12 @@ const signUp = () => {
               }}
             >
               <Label className="text-white/70">Password</Label>
-              <Input className={"bg-black/50 border border-gray-700 text-white rounded-lg"} placeholder="Enter your password" />
+              <Input
+                className={
+                  "bg-black/50 border border-gray-700 text-white rounded-lg"
+                }
+                placeholder="Enter your password"
+              />
               <Description>
                 Must be at least 8 characters with 1 uppercase and 1 number
               </Description>
@@ -117,23 +80,37 @@ const signUp = () => {
             </TextField>
           </FieldGroup>
           <Fieldset.Actions>
-            <Button variant="outline" className={"w-full text-white rounded-xl hover:bg-black/50"} type="submit">
-              Create Account
-             </Button>
+            <Button
+              variant="outline"
+              className={"w-full text-white rounded-xl hover:bg-black/50"}
+              type="submit"
+            >
+              Login to Account
+            </Button>
           </Fieldset.Actions>
         </Fieldset>
         <div className="mt-5 text-center space-y-2">
           <p className="text-center text-gray-400 text-sm">— or —</p>
-          <Button variant="outline" className={"w-full text-white rounded-xl hover:bg-black/50"} type="submit">
-         <FcGoogle />
-              Continue with Google
-             </Button>
-             <span className="text-center text-sm text-gray-300">
-              Already have an account? <Link className="text-primary border-b border-primary" href={"signIn"}>Login here</Link>
-             </span>
+          <Button
+            variant="outline"
+            className={"w-full text-white rounded-xl hover:bg-black/50"}
+            type="submit"
+          >
+            <FcGoogle />
+            Continue with Google
+          </Button>
+          <span className="text-center text-sm text-gray-300">
+            Don't have an account?{" "}
+            <Link
+              className="text-primary border-b border-primary"
+              href={"signUp"}
+            >
+              Register here
+            </Link>
+          </span>
         </div>
       </Form>
     </div>
   );
 };
-export default signUp;
+export default signIn;

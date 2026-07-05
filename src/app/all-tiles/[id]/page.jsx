@@ -1,5 +1,9 @@
+import { GetAllProducts } from "@/lib/products";
 
-const TilesDetails = () => {
+const TilesDetails = async({params}) => {
+  const {id} =await params; 
+  const data = await GetAllProducts(id) ;
+  
   return (
     <div>
       
