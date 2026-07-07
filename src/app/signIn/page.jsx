@@ -1,4 +1,5 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   Description,
@@ -11,13 +12,47 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 
-const signIn = () => {
+const SignIn = () => {
+  const [loading,setLoading] = useState(false)
+  const router = useRouter()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+ try{
+   const {email,password} =  Object.fromEntries(
+      new FormData(e.target)
+    )
+
+    const {data,error} = await authClient.signIn.email({
+      email,
+      password,
+    })
+    if(error){
+      alert(error.message);
+      return;
+    }
+    alert("Login Successful")
+    router.push("/")
+}
+catch(err){
+  console.error(err)
+  alert("Something went wrong")
+}
+finally{
+  setLoading(false)
+}
+   
+    
+  }
+
   return (
     <div className="flex items-center justify-center bg-black/50 min-h-[60vh] p-10 md:p-20">
-      <Form className="w-full max-w-110 bg-[#30302E] p-6 md:p-12 rounded-2xl">
+      <Form className="w-full max-w-110 bg-[#30302E] p-6 md:p-12 rounded-2xl" onSubmit={handleSubmit}>
         <Fieldset>
           <Fieldset.Legend className="text-white text-2xl text-center mb-2">
             <TbLayoutDashboardFilled />
@@ -84,8 +119,9 @@ const signIn = () => {
               variant="outline"
               className={"w-full text-white rounded-xl hover:bg-black/50"}
               type="submit"
+              isDisabled={loading}
             >
-              Login to Account
+              {loading ? "Logging in..." :"Login to Account"}  
             </Button>
           </Fieldset.Actions>
         </Fieldset>
@@ -113,4 +149,4 @@ const signIn = () => {
     </div>
   );
 };
-export default signIn;
+export default SignIn;

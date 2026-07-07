@@ -1,7 +1,8 @@
-
-// "use client";
+"use client";
 
 // import { Avatar, Button } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
+import { Avatar, Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
@@ -11,10 +12,17 @@ import { TbLayoutDashboardFilled } from "react-icons/tb";
 
 // }
 
-const Navbar =async () => {
-
+const Navbar = () => {
   // const data =await getData();
   // console.log(data);
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+
+  const handleSignOut = async() => {
+    await authClient.signOut();
+    
+
+  }
 
   return (
     <div className=" px-2 bg-transparent sticky top-0 z-50 backdrop-blur-sm">
@@ -40,8 +48,10 @@ const Navbar =async () => {
             className="object-cover h-auto w-auto"
           /> */}
           <Link href={"/"}>
-          <h3 className="font-black text-white text-lg flex gap-1 items-center "><TbLayoutDashboardFilled />
-Tiles Gallery</h3>
+            <h3 className="font-black text-white text-lg flex gap-1 items-center ">
+              <TbLayoutDashboardFilled />
+              Tiles Gallery
+            </h3>
           </Link>
         </div>
 
@@ -58,22 +68,20 @@ Tiles Gallery</h3>
         </ul>
 
         <div className="flex gap-4">
+          {!user && (
             <ul className="flex items-center text-white  text-sm gap-5">
+              {/* <li>
+              <Link href={"/signUp"}>SignUp</Link>
+            </li> */}
               <li>
-                <Link href={"/signUp"}>SignUp</Link>
-              </li>
-              <li>
-                <Link href={"/signin"}>SignIn</Link>
-              </li>
-            </ul>
-
-          {/* {!user && (
-            <ul className="flex items-center  text-sm gap-5">
-              <li>
-                <Link href={"/signup"}>SignUp</Link>
-              </li>
-              <li>
-                <Link href={"/signin"}>SignIn</Link>
+                <Link href={"/signIn"}>
+                  <Button
+                    className={"text-white rounded-xl hover:bg-black/50"}
+                    variant="outline"
+                  >
+                    Login
+                  </Button>
+                </Link>
               </li>
             </ul>
           )}
@@ -82,20 +90,21 @@ Tiles Gallery</h3>
             <div className="flex gap-3">
               <Avatar size="sm">
                 <Avatar.Image
-                  alt="John Doe"
-                  src={user?.image}
+                  alt={user?.name}
+                  src={user?.image || "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/3840px-User-avatar.svg.png"}
                   referrerPolicy="no-referrer"
                 />
                 <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
               </Avatar>
 
-              <Button size="sm" variant="danger">SignOut</Button>
+              <Button onClick={handleSignOut } size="sm" variant="danger">
+                SignOut
+              </Button>
             </div>
-          )} */}
+          )}
         </div>
       </nav>
     </div>
   );
 };
-
 export default Navbar;

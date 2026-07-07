@@ -1,5 +1,7 @@
 "use client";
+import { useRouter } from 'next/navigation'
 
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   Description,
@@ -13,13 +15,36 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
+
 import { FcGoogle } from "react-icons/fc";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 
-const signUp = () => {
+const SignUp = () => {
+   const router = useRouter()
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const obj = Object.fromEntries(formData.entries() )
+    // console.log(obj,"this is form data ")
+    const { data, error } = await authClient.signUp.email({
+      email: obj.email,
+      password: obj.password,
+      name: obj.name,
+      image: obj.photoUrl,
+
+    });
+     if(error){
+      alert(error.message || "Signup failed");
+      return;
+    }
+    if(data){
+      alert("SignUp sucessfull");
+      router.push('/signIn')
+    }   
+  }
   return (
     <div className="flex items-center justify-center bg-black/50 min-h-[60vh] p-10 md:p-20">
-      <Form className="w-full max-w-110 bg-[#30302E] p-6 md:p-10 rounded-2xl">
+      <Form onSubmit={handleSubmit} className="w-full max-w-110 bg-[#30302E] p-6 md:p-10 rounded-2xl">
         <Fieldset>
           <Fieldset.Legend className="text-white text-2xl text-center mb-2">
             <TbLayoutDashboardFilled />
@@ -136,4 +161,4 @@ const signUp = () => {
     </div>
   );
 };
-export default signUp;
+export default SignUp;
