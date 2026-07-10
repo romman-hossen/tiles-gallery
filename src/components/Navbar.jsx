@@ -5,7 +5,9 @@ import { authClient } from "@/lib/auth-client";
 import { Avatar, Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
+import { UserProfile } from "./Skeleton";
 // export const getData =async () => {
 //   const  res = await fetch("http://localhost:5001/tiles");
 //   return res.json();
@@ -15,14 +17,26 @@ import { TbLayoutDashboardFilled } from "react-icons/tb";
 const Navbar = () => {
   // const data =await getData();
   // console.log(data);
-  const { data: session, isPending } = authClient.useSession();
+  const { data: session, isPending, error } = authClient.useSession();
   const user = session?.user;
 
-  const handleSignOut = async() => {
+  const handleSignOut = async () => {
+    try{
+    const ok = window.confirm("Do you want to sign out?")
+    if(!ok) return;
     await authClient.signOut();
-    
-
-  }
+    }
+    catch(err){
+     console.error(err)
+     alert("Failed to sign out")
+    }
+  };
+  useEffect(() => {
+    if (error) {
+      alert(error.message || "Something went wrong");
+    }
+  }, [error]);
+  
 
   return (
     <div className=" px-2 bg-transparent sticky top-0 z-50 backdrop-blur-sm">
@@ -68,7 +82,8 @@ const Navbar = () => {
         </ul>
 
         <div className="flex gap-4">
-          {!user && (
+          {isPending && <UserProfile/>}
+          {!isPending && !user && (
             <ul className="flex items-center text-white  text-sm gap-5">
               {/* <li>
               <Link href={"/signUp"}>SignUp</Link>
@@ -86,18 +101,20 @@ const Navbar = () => {
             </ul>
           )}
 
-          {user && (
+          {!isPending && user && (
             <div className="flex gap-3">
               <Avatar size="sm">
                 <Avatar.Image
                   alt={user?.name}
-                  src={user?.image || "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/3840px-User-avatar.svg.png"}
+                  src={
+                    user?.image ||
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/3840px-User-avatar.svg.png"
+                  }
                   referrerPolicy="no-referrer"
                 />
-                <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
+                <Avatar.Fallback>{user?.name.charAt(0) || "U"}</Avatar.Fallback>
               </Avatar>
-
-              <Button onClick={handleSignOut } size="sm" variant="danger">
+              <Button onClick={handleSignOut} size="sm" variant="outline" className={"hover:bg-black/40 text-white hover:text-primary rounded-xl"}>
                 SignOut
               </Button>
             </div>
