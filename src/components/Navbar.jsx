@@ -17,9 +17,9 @@ import { UserProfile } from "./Skeleton";
 const Navbar = () => {
   // const data =await getData();
   // console.log(data);
+
   const { data: session, isPending, error } = authClient.useSession();
   const user = session?.user;
-
   const handleSignOut = async () => {
     try{
     const ok = window.confirm("Do you want to sign out?")
@@ -82,7 +82,7 @@ const Navbar = () => {
         </ul>
 
         <div className="flex gap-4">
-          {isPending && <UserProfile/>}
+          {isPending && !user && <UserProfile />}
           {!isPending && !user && (
             <ul className="flex items-center text-white  text-sm gap-5">
               {/* <li>
@@ -102,7 +102,7 @@ const Navbar = () => {
           )}
 
           {!isPending && user && (
-            <div className="flex gap-3">
+            <div className="flex items-center gap-3">
               <Avatar size="sm">
                 <Avatar.Image
                   alt={user?.name}

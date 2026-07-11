@@ -7,9 +7,10 @@ import { useRouter } from "next/navigation";
 import { showToast } from "nextjs-toast-notify";
 import { BiUser } from "react-icons/bi";
 import { LiaSignOutAltSolid } from "react-icons/lia";
-import { MdAddAPhoto, MdOutlineAccountCircle, MdOutlineEmail, MdUpdate } from "react-icons/md";
+import { MdAddAPhoto, MdOutlineAccountCircle, MdOutlineEmail } from "react-icons/md";
 import { SlCalender } from "react-icons/sl";
 import { TbPasswordUser, TbPhotoCode } from "react-icons/tb";
+import UpdateProfile from "./UpdateProfile";
 
 
 const ProfileCard = () => {
@@ -29,8 +30,9 @@ const ProfileCard = () => {
       icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/></svg>',
       sound: true,
     });
-    router.push("/signUp");
+    router.push("/signIn");
   };
+  console.log(user?.image)
 
   // ── Loading ──
   if (isPending) {
@@ -94,12 +96,18 @@ const ProfileCard = () => {
             {/* Avatar + info */}
             <div className="flex items-center gap-5 mb-7">
               <div className="relative">
-                <Avatar
-                  src={user?.image || ""}
-                  name={user?.name?.charAt(0)?.toUpperCase() || "U"}
-                  className="w-20 h-20 text-3xl font-medium bg-[#e8c547]/10  text-primary border-2 border-[#e8c547]/40"
-                  
+                 <Avatar 
+                  className="w-20 h-20 text-3xl font-medium bg-[#e8c547]/10  text-primary border-2 border-[#e8c547]/40">
+                <Avatar.Image
+                  alt={user?.name}
+                  src={
+                    user?.image ||
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/3840px-User-avatar.svg.png"
+                  }
+                  referrerPolicy="no-referrer"
                 />
+                <Avatar.Fallback>{user?.name.charAt(0) || "U"}</Avatar.Fallback>
+              </Avatar>
                   
                 {/* Camera icon */}
                 <Link href="/my-profile/update"
@@ -154,11 +162,12 @@ const ProfileCard = () => {
                 <LiaSignOutAltSolid />
  Sign out
               </Button>
-              <Link href="/my-profile/update">
-                <Button className="bg-primary text-[#0f0e17] font-semibold rounded-xl hover:bg-yellow-400 px-6">
-                  <MdUpdate /> Update profile
+              {/* <Link href="/">
+                <Button >
                 </Button>
-              </Link>
+              </Link> */}
+              <UpdateProfile />
+              
             </div>
           </div>
         </div>
