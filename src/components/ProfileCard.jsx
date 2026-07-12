@@ -106,7 +106,7 @@ const ProfileCard = () => {
                   }
                   referrerPolicy="no-referrer"
                 />
-                <Avatar.Fallback>{user?.name.charAt(0) || "U"}</Avatar.Fallback>
+                <Avatar.Fallback className="text-2xl">{user?.name.charAt(0) || "U"}</Avatar.Fallback>
               </Avatar>
                   
                 {/* Camera icon */}
