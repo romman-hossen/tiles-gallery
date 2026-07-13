@@ -1,9 +1,9 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-// import {Envelope} from "@gravity-ui/icons";
-import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
+import { Button, Input, Label, Modal, Surface, TextField, } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { showToast } from "nextjs-toast-notify";
 import { LuArrowLeft } from "react-icons/lu";
 import { MdUpdate } from "react-icons/md";
 const UpdateProfile = () => {
@@ -13,11 +13,31 @@ const UpdateProfile = () => {
    const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, image } = Object.fromEntries(new FormData(e.target));
-
+     const newName = name || user?.name;
+    const newImage = image || user?.image;
+     if(newName == user?.name && newImage == user?.image){
+       showToast.error("No changes made!", {
+      duration: 3000,
+      position: "top-center",
+      transition: "bounceInDown",
+    });   
+    return;
+    }
     await authClient.updateUser({
-      name: name || user?.name,
-      image: image || user?.image,
+      name: newName,
+      image: newImage,
     });
+    if(name || image) {
+     showToast.success(`Profile Updated Successful!`, {
+    duration: 4000,
+    progress: true,
+    position: "top-center",
+    transition: "bounceIn",
+    icon: '',
+    sound: true,
+  });
+    }
+   
   };
 
   return (
@@ -44,7 +64,7 @@ const UpdateProfile = () => {
               </Modal.Header>
               <Modal.Body className="p-6">
                 <Surface variant="default">
-                  <form
+                  <form 
                     className="flex flex-col gap-4  bg-[#30302E]"
                     onSubmit={handleSubmit}
                   >
@@ -59,7 +79,7 @@ const UpdateProfile = () => {
                         className={
                           "text-white bg-black/50 border border-white/50 focus:border-none"
                         }
-                        placeholder="Enter your name"
+                        placeholder="Rename your name"
                       />
                     </TextField>
                     <TextField
@@ -69,11 +89,12 @@ const UpdateProfile = () => {
                     >
                       <Label className="text-white/70">Photo URL</Label>
                       <Input
-                        className="text-white bg-black/50 border border-white/50 focus:border-none"
-                        placeholder="Enter your company name"
+                        className="text-white truncate bg-black/50 border border-white/50 focus:border-none"
+                        placeholder="Enter your new Photo URL"
                       />
                     </TextField>
                     <Button
+
                       type="submit"
                       className={
                         "w-full mt-8 rounded-xl text-white hover:bg-black"

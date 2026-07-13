@@ -1,13 +1,15 @@
 "use client";
 
-// import { Avatar, Button } from "@heroui/react";
+
 import { authClient } from "@/lib/auth-client";
 import { Avatar, Button } from "@heroui/react";
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 import { UserProfile } from "./Skeleton";
+import { showToast } from "nextjs-toast-notify";
+import Navlinks from "./Navlinks";
+import { CiMenuBurger } from "react-icons/ci";
 // export const getData =async () => {
 //   const  res = await fetch("http://localhost:5001/tiles");
 //   return res.json();
@@ -17,6 +19,7 @@ import { UserProfile } from "./Skeleton";
 const Navbar = () => {
   // const data =await getData();
   // console.log(data);
+  const [open,setOpen] = useState(false);
 
   const { data: session, isPending, error } = authClient.useSession();
   const user = session?.user;
@@ -25,10 +28,25 @@ const Navbar = () => {
     const ok = window.confirm("Do you want to sign out?")
     if(!ok) return;
     await authClient.signOut();
+    showToast.success("SignOut success", {
+    duration: 4000,
+    progress: true,
+    position: "top-center",
+    transition: "bounceInDown",
+    icon: '',
+    sound: true,
+  });
     }
     catch(err){
      console.error(err)
-     alert("Failed to sign out")
+     showToast.error("Failed to sign out", {
+    duration: 4000,
+    progress: true,
+    position: "top-center",
+    transition: "bounceInDown",
+    icon: '',
+    sound: true,
+  });
     }
   };
   useEffect(() => {
@@ -61,23 +79,37 @@ const Navbar = () => {
             height={30}
             className="object-cover h-auto w-auto"
           /> */}
-          <Link href={"/"}>
-            <h3 className="font-black text-white text-lg flex gap-1 items-center ">
+          <Link className="hidden md:block" href={"/"}>
+            <h3 className="font-black text-white text-lg flex gap-1 items-center " >
               <TbLayoutDashboardFilled />
               Tiles Gallery
             </h3>
           </Link>
+          <span className="md:hidden text-2xl" onClick={() => setOpen(!open)}>
+          <CiMenuBurger />
+          </span>
+        </div>
+        <div className="md:hidden">
+             {open && (
+        <ul className={`md:hidden mt-4 flex flex-col gap-3  text-white bg-bg backdrop-blur-sm rounded-2xl absolute top-9 z-20  left-2 p-6`}>
+          <li><Link onClick={() => setOpen(!open)} href="/">Home</Link></li>
+          <li><Link onClick={() => setOpen(!open)} href="/all-photos">All Photos</Link></li>
+          <li><Link onClick={() => setOpen(!open)} href="/pricing">Pricing</Link></li>
+          <li><Link onClick={() => setOpen(!open)} href="/profile">Profile</Link></li>
+        </ul>
+      )}
+
         </div>
 
-        <ul className="flex items-center gap-5 text-sm text-gray-200">
+        <ul className="hidden md:flex items-center gap-5 text-sm text-gray-200 ">
           <li>
-            <Link href={"/"}>Home</Link>
+            <Navlinks href={"/"}>Home</Navlinks>
           </li>
           <li>
-            <Link href={"/all-tiles"}>All Tiles</Link>
+            <Navlinks href={"/all-tiles"}>All Tiles</Navlinks>
           </li>
           <li>
-            <Link href={"/my-profile"}>My Profile</Link>
+            <Navlinks href={"/my-profile"}>My Profile</Navlinks>
           </li>
         </ul>
 

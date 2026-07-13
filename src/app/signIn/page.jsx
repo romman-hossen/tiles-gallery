@@ -13,6 +13,7 @@ import {
 } from "@heroui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { showToast } from "nextjs-toast-notify";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
@@ -36,12 +37,26 @@ const SignIn = () => {
       alert(error.message);
       return;
     }
-    alert("Login Successful")
+    showToast.success("Login Successful", {
+    duration: 4000,
+    progress: true,
+    position: "top-center",
+    transition: "slideInUp",
+    icon: '',
+    sound: true,
+  });
     router.push("/")
 }
 catch(err){
   console.error(err)
-  alert("Something went wrong")
+ showToast.error("Something went wrong", {
+    duration: 4000,
+    progress: true,
+    position: "top-center",
+    transition: "slideInUp",
+    icon: '',
+    sound: true,
+  });
 }
 finally{
   setLoading(false)

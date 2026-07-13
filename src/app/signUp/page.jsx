@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 import { authClient } from "@/lib/auth-client";
 import {
@@ -20,31 +20,40 @@ import { FcGoogle } from "react-icons/fc";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 
 const SignUp = () => {
-   const router = useRouter()
-  const handleSubmit = async (e) =>{
+  const router = useRouter();
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const obj = Object.fromEntries(formData.entries() )
+    const obj = Object.fromEntries(formData.entries());
     // console.log(obj,"this is form data ")
     const { data, error } = await authClient.signUp.email({
       email: obj.email,
       password: obj.password,
       name: obj.name,
       image: obj.photoUrl,
-
     });
-     if(error){
+    if (error) {
       alert(error.message || "Signup failed");
       return;
     }
-    if(data){
-      alert("SignUp sucessfull");
-      router.push('/signIn')
-    }   
-  }
+    if (data) {
+      showToast.success("SignUp sucessfull", {
+        duration: 4000,
+        progress: true,
+        position: "top-center",
+        transition: "bounceIn",
+        icon: "",
+        sound: true,
+      });
+      router.push("/signIn");
+    }
+  };
   return (
     <div className="flex items-center justify-center bg-black/50 min-h-[60vh] p-10 md:p-20">
-      <Form onSubmit={handleSubmit} className="w-full max-w-110 bg-[#30302E] p-6 md:p-10 rounded-2xl">
+      <Form
+        onSubmit={handleSubmit}
+        className="w-full max-w-110 bg-[#30302E] p-6 md:p-10 rounded-2xl"
+      >
         <Fieldset>
           <Fieldset.Legend className="text-white text-2xl text-center mb-2">
             <TbLayoutDashboardFilled />
@@ -134,7 +143,12 @@ const SignUp = () => {
               }}
             >
               <Label className="text-white/70">Password</Label>
-              <Input className={"bg-black/50 border border-gray-700 text-white rounded-lg"} placeholder="Enter your password" />
+              <Input
+                className={
+                  "bg-black/50 border border-gray-700 text-white rounded-lg"
+                }
+                placeholder="Enter your password"
+              />
               <Description>
                 Must be at least 8 characters with 1 uppercase and 1 number
               </Description>
@@ -142,20 +156,34 @@ const SignUp = () => {
             </TextField>
           </FieldGroup>
           <Fieldset.Actions>
-            <Button variant="outline" className={"w-full text-white rounded-xl hover:bg-black/50"} type="submit">
+            <Button
+              variant="outline"
+              className={"w-full text-white rounded-xl hover:bg-black/50"}
+              type="submit"
+            >
               Create Account
-             </Button>
+            </Button>
           </Fieldset.Actions>
         </Fieldset>
         <div className="mt-5 text-center space-y-2">
           <p className="text-center text-gray-400 text-sm">— or —</p>
-          <Button variant="outline" className={"w-full text-white rounded-xl hover:bg-black/50"} type="submit">
-         <FcGoogle />
-              Continue with Google
-             </Button>
-             <span className="text-center text-sm text-gray-300">
-              Already have an account? <Link className="text-primary border-b border-primary" href={"signIn"}>Login here</Link>
-             </span>
+          <Button
+            variant="outline"
+            className={"w-full text-white rounded-xl hover:bg-black/50"}
+            type="submit"
+          >
+            <FcGoogle />
+            Continue with Google
+          </Button>
+          <span className="text-center text-sm text-gray-300">
+            Already have an account?{" "}
+            <Link
+              className="text-primary border-b border-primary"
+              href={"signIn"}
+            >
+              Login here
+            </Link>
+          </span>
         </div>
       </Form>
     </div>
