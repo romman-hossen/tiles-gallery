@@ -1,8 +1,6 @@
 "use client";
-
-
 import { authClient } from "@/lib/auth-client";
-import { Avatar, Button } from "@heroui/react";
+import { Avatar, Button, } from "@heroui/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
@@ -10,15 +8,10 @@ import { UserProfile } from "./Skeleton";
 import { showToast } from "nextjs-toast-notify";
 import Navlinks from "./Navlinks";
 import { CiMenuBurger } from "react-icons/ci";
-// export const getData =async () => {
-//   const  res = await fetch("http://localhost:5001/tiles");
-//   return res.json();
-
-// }
+import { RiCloseLargeLine } from "react-icons/ri";
 
 const Navbar = () => {
-  // const data =await getData();
-  // console.log(data);
+  
   const [open,setOpen] = useState(false);
 
   const { data: session, isPending, error } = authClient.useSession();
@@ -86,16 +79,21 @@ const Navbar = () => {
             </h3>
           </Link>
           <span className="md:hidden text-2xl" onClick={() => setOpen(!open)}>
-          <CiMenuBurger />
+            {open ? <RiCloseLargeLine />  : <CiMenuBurger /> }
+       
           </span>
         </div>
         <div className="md:hidden">
              {open && (
-        <ul className={`md:hidden mt-4 flex flex-col gap-3  text-white bg-bg backdrop-blur-sm rounded-2xl absolute top-9 z-20  left-2 p-6`}>
+              
+        <ul className={`md:hidden  mt-4 flex flex-col gap-3  text-white bg-bg backdrop-blur-sm rounded-2xl transition absolute top-9 z-20  left-2 p-6`}>
+           <h3 className="font-black text-white text-lg flex gap-1 items-center " >
+              <TbLayoutDashboardFilled />
+              Tiles Gallery
+            </h3>
           <li><Link onClick={() => setOpen(!open)} href="/">Home</Link></li>
-          <li><Link onClick={() => setOpen(!open)} href="/all-photos">All Photos</Link></li>
-          <li><Link onClick={() => setOpen(!open)} href="/pricing">Pricing</Link></li>
-          <li><Link onClick={() => setOpen(!open)} href="/profile">Profile</Link></li>
+          <li><Link onClick={() => setOpen(!open)} href={"/all-tiles"}>All Tiles</Link></li>
+          <li><Link onClick={() => setOpen(!open)} href={"/my-profile"}>My Profile</Link></li>
         </ul>
       )}
 

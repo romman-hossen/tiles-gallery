@@ -10,7 +10,7 @@ export const inter = Inter({
 export const playfair = Playfair_Display({
   subsets: ["latin"],
 });
-//                                                                                                                                                                              
+//
 
 export default function RootLayout({ children }) {
   return (
@@ -19,13 +19,13 @@ export default function RootLayout({ children }) {
       data-theme="light"
       className={`${inter.className} h-full antialiased `}
     >
-      
-      
-      <body className="min-h-full flex flex-col bg-bg text-white ">
-        <Navbar/>
-        <div className="flex-1 border-b-2 border-t-2 border-yellow-300/50">{children}</div>
+      <body className="min-h-full flex flex-col bg-bg text-white">
+        <Navbar />
+        <main className="flex-1 border-y-2 border-yellow-300/50">
+         {children}
+        </main>
         <Footer />
-        </body>
+      </body>
     </html>
   );
 }

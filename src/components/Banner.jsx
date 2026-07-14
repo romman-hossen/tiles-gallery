@@ -22,9 +22,9 @@ export default function Banner() {
               every style and space.
             </p>
           </div>
-          <div>
+          <Link href={'/all-tiles'}>
             <Button variant="outline" className={"hover:bg-bg hover:text-primary text-white rounded-md animate__animated animate__fadeInLeft"}>Browse Now <BiRightArrow /></Button>
-          </div>
+          </Link>
         </div>
       </section>
 
@@ -33,11 +33,11 @@ export default function Banner() {
   );
 }
 
-const tileImages = [
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=120&q=50",
-  "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=120&q=50",
-  "https://images.unsplash.com/photo-1615971677499-5467cbab01c0?w=120&q=50",
-  "https://images.unsplash.com/photo-1600607686527-6fb886090705?w=120&q=50",
-  "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=120&q=50",
-  "https://images.unsplash.com/photo-1558905586-b023e5d8d3b0?w=120&q=50",
-];
+// const tileImages = [
+//   "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=120&q=50",
+//   "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=120&q=50",
+//   "https://images.unsplash.com/photo-1615971677499-5467cbab01c0?w=120&q=50",
+//   "https://images.unsplash.com/photo-1600607686527-6fb886090705?w=120&q=50",
+//   "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=120&q=50",
+//   "https://images.unsplash.com/photo-1558905586-b023e5d8d3b0?w=120&q=50",
+// ];
