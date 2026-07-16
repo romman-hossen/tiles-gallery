@@ -15,7 +15,7 @@ const Category = async () => {
     // }
   return (
     <div className="max-w-7xl mx-auto p-10 flex flex-col justify-center items-center space-y-4">
-      <h2 className="">500+ tiles in our collection</h2>
+      <h2 className="">Explore tiles in our collection</h2>
       <div className="">
         <SearchField name="search">
           <SearchField.Group  className={"bg-[#30302E] border border-gray-600 rounded-lg px-4 py-2 flex items-center gap-2 "}>

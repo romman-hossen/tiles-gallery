@@ -61,6 +61,11 @@ catch(err){
 finally{
   setLoading(false)
 }
+}
+const handleGoogleLogin= async () =>{
+  await authClient.signIn.social({
+    provider: "google",
+  });
    
     
   }
@@ -146,15 +151,16 @@ finally{
             variant="outline"
             className={"w-full text-white rounded-xl hover:bg-black/50"}
             type="submit"
+            onClick={handleGoogleLogin}
           >
             <FcGoogle />
             Continue with Google
           </Button>
           <span className="text-center text-sm text-gray-300">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link
               className="text-primary border-b border-primary"
-              href={"signUp"}
+              href={"signup"}
             >
               Register here
             </Link>

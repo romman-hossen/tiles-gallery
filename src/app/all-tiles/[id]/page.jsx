@@ -5,7 +5,6 @@ import Link from "next/link";
 const TilesDetails = async ({ params }) => {
   const { id } = await params;
   const tile = await GetProductById(id);
-
   if (!tile) {
     return (
       <div className="min-h-screen bg-bg flex flex-col items-center justify-center gap-4">

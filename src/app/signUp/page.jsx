@@ -48,6 +48,11 @@ const SignUp = () => {
       router.push("/signIn");
     }
   };
+  const handleGoogleLogin = async () =>{
+    await authClient.signIn.social({
+    provider: "google",
+  });
+  }
   return (
     <div className="flex items-center justify-center bg-black/50 min-h-[60vh] p-10 md:p-20">
       <Form
@@ -171,6 +176,7 @@ const SignUp = () => {
             variant="outline"
             className={"w-full text-white rounded-xl hover:bg-black/50"}
             type="submit"
+            onClick={handleGoogleLogin}
           >
             <FcGoogle />
             Continue with Google

@@ -8,6 +8,7 @@ import { BiRightArrow } from "react-icons/bi";
 export default function Banner() {
   return (
     <>
+  
       <section className="min-h-125 bg-linear-to-r from-blue-950/50 to-cyan-950 flex justify-center items-center p-10 ">
         <div className="text-center space-y-10 animate__animated animate__fadeInUp">
           <div className="space-y-5">
